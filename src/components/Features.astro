@@ -1,0 +1,16 @@
+---
+import Card from "./ui/Card.astro";
+---
+
+<section class="bg-[var(--azul-claro)] flex flex-col items-center" id="caracteristicas">
+    <h2 class="text-6xl font-bold p-14">¿Por que elegir Costly?</h2>
+    <p class="text-xl text-gray-500">Diseñada especificamente para viajeros que quieren mantener el control total de sus finanzas</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 mt-12">
+        <Card title="Control Presupuestario" description="Establece tu presupuesto de viaje y ve en tiempo real cuanto has gastado y cuanto te queda disponible." icon="streamline-flex:target-remix" />
+        <Card title="Categorizacion Inteligente" description="Organiza tus gastos por categoria: comida, transporte, alojamiento, entretenimiento y más." icon="solar:chart-2-bold" />
+        <Card title="Gestión Completa" description="Crea, edita y elimina gastos simples. Interfaz intuitiva diseñada para el uso diario." icon="fluent:edit-24-filled"/>
+        <Card title="Filtros Avanzados" description="Filtra tus gastos por categoria para analizar en que estas gastando mas durante tu viaje." icon="lucide:search" />
+        <Card title="Exportacion PDF" description="Genera reportes profesionales de todos tus gastos para llevar un registro completo post-viaje." icon="lucide:file-text" />
+        <Card title="100% Offline" description="Todos tus datos se almacenan localmente. Sin necesidad de internet ni riesgo de perdida de privacidad." icon="lucide:lock-keyhole"/>
+    </div>
+</section>
