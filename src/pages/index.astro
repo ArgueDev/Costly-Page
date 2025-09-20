@@ -2,12 +2,16 @@
 import Features from '../components/Features.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import Screenshots from '../components/Screenshots.astro';
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
 ---
 
 <Layout>
 	<Header />
-	<Hero />
-	<Features />
+	<main>
+		<Hero />
+		<Features />
+		<Screenshots />
+	</main>
 </Layout>
