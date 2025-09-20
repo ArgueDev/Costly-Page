@@ -1,0 +1,18 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="flex flex-col items-center p-20 -bg-linear-210 from-[var(--azul-primario)] to-[var(--azul-claro)] text-white" id="descarga">
+    <h2 class="text-5xl font-bold mb-8">¡Empieza a controlar tu gastos de viaje hoy!</h2>
+    <p class="text-2xl mb-8">Descarga Costly y nunca más te preocupes por exceder tu presupuesto de viaje.</p>
+    <div class="grid grid-cols-2 gap-8">
+        <div class="flex items-center place-content-center gap-4 bg-white text-xl text-[var(--azul-primario)] px-8 py-4 rounded-full transition-all duration-300 ease-in hover:translate-y-[-3px]">
+            <a href="">Disponible en Play Store</a>
+            <Icon name="mage:playstore" />
+        </div>
+        <div class="flex items-center gap-4 px-8 py-4 rounded-full border-white border-2 text-xl transition-all duration-300 ease-in hover:bg-white hover:text-[var(--azul-primario)]">
+            <a href="">Disponible proximamente en App Store</a>
+            <Icon name="logos:apple-app-store"/>
+        </div>
+    </div>
+</section>
