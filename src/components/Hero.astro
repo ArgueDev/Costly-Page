@@ -3,16 +3,16 @@ import {Image} from 'astro:assets';
 import controlScreen from '../assets/control-screen.png';
 ---
 
-<section class="flex items-center justify-around h-screen -bg-linear-210 from-[var(--azul-primario)] to-[var(--azul-claro)] text-white mt-12" id="inicio">
+<section class="flex flex-col lg:flex-row items-center justify-around min-h-screen md:h-screen -bg-linear-210 from-[var(--azul-primario)] to-[var(--azul-claro)] text-white p-10 lg:p-0 text-center md:text-left" id="inicio">
     <div class="max-w-2xl">
         <h1 class="text-6xl font-bold mb-8">Controla tus gastos de viaje</h1>
-        <p class="text-xl font-semibold">La app perfecta para mantener tu presupuesto bajo control durante tus aventuras. Simple, intuitiva y completamente offline.</p>
-        <div class="mt-8 flex gap-4">
+        <p class="text-2xl md:text-xl font-semibold">La app perfecta para mantener tu presupuesto bajo control durante tus aventuras. Simple, intuitiva y completamente offline.</p>
+        <div class="mt-8 flex flex-col md:flex-row gap-4">
             <a class="bg-white text-xl text-[var(--azul-primario)] px-8 py-4 rounded-full transition-all duration-300 ease-in hover:translate-y-[-3px]" href="#descarga">Descarga Ahora</a>
             <a class="px-8 py-4 rounded-full border-white border-2 text-xl transition-all duration-300 ease-in hover:bg-white hover:text-[var(--azul-primario)]" href="#caracteristicas">Ver Características</a>
         </div>
     </div>
-    <div>
+    <div class="mt-10 md:mt-0">
         <Image src={controlScreen} alt="Control Screen" width={300} height={300} />
     </div>
 </section>

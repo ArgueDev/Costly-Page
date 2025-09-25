@@ -1,10 +1,14 @@
 ---
-
+import { Image } from 'astro:assets';
+import LogoImage from '../assets/logo.png';
 ---
 
-<header class="fixed top-0 w-full shadow-2xl">
-    <nav class="flex justify-between items-center bg-[var(--azul-claro)] px-14 py-6">
-        <p class="text-3xl font-bold text-[var(--azul-primario)]">Costly</p>
+<header class="">
+    <nav class="hidden md:flex justify-between items-center bg-[var(--azul-claro)] px-12 py-4">
+        <a class="flex items-center" href="#inicio">
+            <Image src={LogoImage} alt="Logo" width={70} height={70} />
+            <p class="text-3xl font-bold text-[var(--azul-primario)]">Costly</p>
+        </a>
         <ul class=" flex gap-8">
             <li><a class="font-semibold hover:text-[var(--azul-primario)]" href="#inicio">Inicio</a></li>
             <li><a class="font-semibold hover:text-[var(--azul-primario)]" href="#caracteristicas">Características</a></li>
@@ -12,9 +16,28 @@
             <li><a class="font-semibold hover:text-[var(--azul-primario)]" href="#descarga">Descarga</a></li>
         </ul>
     </nav>
+
+    <nav class="bg-[var(--azul-claro)] flex md:hidden justify-center items-center py-4">
+        <a class="flex items-center" href="#inicio">
+            <Image src={LogoImage} alt="Logo" width={70} height={70} />
+            <p class="text-3xl font-bold text-[var(--azul-primario)]">Costly</p>
+        </a>
+    </nav>
 </header>
 
 <script>
+    let lastScroll = 0;
+    const navBar = document.querySelector('header');
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > 100) {
+            navBar?.classList.add('fixed', 'top-0', 'shadow-2xl', 'w-full');
+        } else {
+            navBar?.classList.remove('fixed', 'top-0', 'shadow-2xl', 'w-full');
+        }
+    })
 // Smooth scrolling para los enlaces de navegación
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e: Event) {

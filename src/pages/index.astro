@@ -7,6 +7,8 @@ import Hero from '../components/Hero.astro';
 import Screenshots from '../components/Screenshots.astro';
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
+
+import { Icon } from 'astro-icon/components';
 ---
 
 <Layout>
@@ -16,6 +18,134 @@ import "../styles/global.css";
 		<Features />
 		<Screenshots />
 		<FinalCTA />
+		
+		<!-- Overlay para cerrar el menú (debe ir primero) -->
+		<div class="fixed inset-0 z-40 opacity-0 invisible transition-all duration-300 md:hidden pointer-events-none" id="fabOverlay"></div>
+
+		<!-- FAB Container -->
+		<div class="fixed bottom-6 right-6 md:hidden z-50 flex flex-col items-end" id="fabContainer">
+			<!-- Opciones del menú (inicialmente ocultas) -->
+			<div class="flex flex-col items-end mb-4 space-y-3 opacity-0 invisible transform translate-y-4 transition-all duration-300" id="fabOptions">
+				<a href="#inicio" class="fab-option flex items-center bg-white rounded-full shadow-lg px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+					<span class="text-sm font-medium whitespace-nowrap">Inicio</span>
+				</a>
+				<a href="#caracteristicas" class="fab-option flex items-center bg-white rounded-full shadow-lg px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+					<span class="text-sm font-medium whitespace-nowrap">Características</span>
+				</a>
+				<a href="#capturas" class="fab-option flex items-center bg-white rounded-full shadow-lg px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+					<span class="text-sm font-medium whitespace-nowrap">Capturas</span>
+				</a>
+				<a href="#descarga" class="fab-option flex items-center bg-white rounded-full shadow-lg px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+					<span class="text-sm font-medium whitespace-nowrap">Descarga</span>
+				</a>
+			</div>
+			
+			<!-- Botón principal FAB -->
+			<button class="bg-blue-600 hover:bg-blue-700 text-white rounded-3xl w-16 h-16 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform hover:scale-105 relative" id="fabButton">
+				<Icon name="lucide:menu" size={24} id="fabIconMenu" class="absolute transition-all duration-300 opacity-100 rotate-0 scale-100"/>
+				<Icon name="lucide:x" size={24} id="fabIconClose" class="absolute transition-all duration-300 opacity-0 rotate-90 scale-75"/>
+			</button>
+		</div>
+
+		<!-- Anclas para navegación -->
+		<div class="hidden">
+			<a id="inicio"></a>
+			<a id="caracteristicas"></a>
+			<a id="capturas"></a>
+			<a id="descarga"></a>
+		</div>
 	</main>
 	<Footer />
 </Layout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const fabButton = document.getElementById('fabButton') as HTMLButtonElement;
+		const fabOptions = document.getElementById('fabOptions') as HTMLDivElement;
+		const fabOverlay = document.getElementById('fabOverlay') as HTMLDivElement;
+		const fabIconMenu = document.getElementById('fabIconMenu') as HTMLElement;
+		const fabIconClose = document.getElementById('fabIconClose') as HTMLElement;
+		
+		let isMenuOpen = false;
+
+		function toggleFabMenu() {
+			isMenuOpen = !isMenuOpen;
+			
+			if (isMenuOpen) {
+				// Abrir menú
+				fabOptions.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+				fabOptions.classList.add('opacity-100', 'visible', 'translate-y-0');
+				
+				fabOverlay.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+				fabOverlay.classList.add('opacity-100', 'visible', 'pointer-events-auto');
+				
+				// Cambiar ícono a X
+				fabIconMenu.classList.remove('opacity-100', 'rotate-0', 'scale-100');
+				fabIconMenu.classList.add('opacity-0', 'rotate-90', 'scale-75');
+				
+				fabIconClose.classList.remove('opacity-0', 'rotate-90', 'scale-75');
+				fabIconClose.classList.add('opacity-100', 'rotate-0', 'scale-100');
+				
+				// Cambiar color del botón
+				fabButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+				fabButton.classList.add('bg-red-500', 'hover:bg-red-600');
+			} else {
+				// Cerrar menú
+				fabOptions.classList.add('opacity-0', 'invisible', 'translate-y-4');
+				fabOptions.classList.remove('opacity-100', 'visible', 'translate-y-0');
+				
+				fabOverlay.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+				fabOverlay.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
+				
+				// Cambiar ícono de vuelta a menú
+				fabIconClose.classList.remove('opacity-100', 'rotate-0', 'scale-100');
+				fabIconClose.classList.add('opacity-0', 'rotate-90', 'scale-75');
+				
+				fabIconMenu.classList.remove('opacity-0', 'rotate-90', 'scale-75');
+				fabIconMenu.classList.add('opacity-100', 'rotate-0', 'scale-100');
+				
+				// Restaurar color del botón
+				fabButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+				fabButton.classList.remove('bg-red-500', 'hover:bg-red-600');
+			}
+		}
+
+		// Event listeners
+		fabButton.addEventListener('click', toggleFabMenu);
+		fabOverlay.addEventListener('click', toggleFabMenu);
+		
+		// Cerrar menú al hacer click en una opción
+		const fabOptionLinks = document.querySelectorAll('.fab-option');
+		fabOptionLinks.forEach(link => {
+			link.addEventListener('click', () => {
+				if (isMenuOpen) {
+					toggleFabMenu();
+				}
+			});
+		});
+
+		// Cerrar menú con Escape
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && isMenuOpen) {
+				toggleFabMenu();
+			}
+		});
+	});
+</script>
+
+<style>
+	/* Animaciones adicionales */
+	.fab-option {
+		transform: translateX(10px);
+		transition: all 0.3s ease;
+	}
+	
+	.fab-options.opacity-100 .fab-option {
+		transform: translateX(0);
+	}
+	
+	.fab-options.opacity-100 .fab-option:nth-child(1) { transition-delay: 0.1s; }
+	.fab-options.opacity-100 .fab-option:nth-child(2) { transition-delay: 0.15s; }
+	.fab-options.opacity-100 .fab-option:nth-child(3) { transition-delay: 0.2s; }
+	.fab-options.opacity-100 .fab-option:nth-child(4) { transition-delay: 0.25s; }
+</style>
