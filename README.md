@@ -1,7 +1,7 @@
 <h1 align="center">📱 Costly - Controla tus gastos de viaje</h1>
 
 <p align="center">
-  <img src="assets/logo.png" alt="Costly Demo" width="400"/>
+  <img src="src/assets/logo.png" alt="Costly Demo" width="400"/>
 </p>
 
 <p align="center">
@@ -31,7 +31,7 @@ La landing está construida con:
 ## 📸 Capturas de la app
 | Dashboard | Lista de gastos | Crear gasto |
 |-------|----------------|-------------|
-| ![](assets/dashboard.png) | ![](assets/lista-gastos.png) | ![](assets/formulario.png) |
+| ![](src/assets/dashboard.png) | ![](src/assets/lista-gastos.png) | ![](src/assets/formulario.png) |
 
 ---
 
