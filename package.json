@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@iconify-json/fluent": "^1.2.31",
+    "@iconify-json/icon-park-outline": "^1.2.4",
     "@iconify-json/logos": "^1.2.9",
     "@iconify-json/lucide": "^1.2.68",
     "@iconify-json/mage": "^1.2.4",
+    "@iconify-json/material-symbols": "^1.2.40",
     "@iconify-json/solar": "^1.2.4",
     "@iconify-json/streamline-flex": "^1.2.3",
     "@tailwindcss/vite": "^4.1.13",
