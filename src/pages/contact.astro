@@ -1,26 +1,33 @@
 ---
 import HeaderSecundary from "../components/HeaderSecundary.astro";
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 import "../styles/global.css";
 ---
 
 <Layout title="Contacto">
-    <HeaderSecundary title="Contáctanos" description="¿Tienes preguntas o necesitas ayuda? No dudes en contactarnos."/>
-    <!-- Formulario de contacto -->
-  <form class="max-w-md mx-auto p-6 bg-[var(--azul-claro)] rounded-lg shadow-md m-10">
+  <HeaderSecundary
+    title="Contáctanos"
+    description="¿Tienes preguntas o necesitas ayuda? No dudes en contactarnos."
+  />
+  <!-- Formulario de contacto -->
+  <form
+    class="max-w-md mx-auto p-6 bg-[var(--azul-claro)] rounded-lg shadow-md m-10"
+    id="contactForm"
+  >
     <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
       Contáctanos
     </h2>
 
     <!-- Campo Nombre -->
     <div class="mb-4">
-      <label for="nombre" class="block text-sm font-medium text-gray-700 mb-2">
+      <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
         Nombre completo
       </label>
       <input
         type="text"
-        id="nombre"
-        name="nombre"
+        id="name"
+        name="name"
         required
         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         placeholder="Tu nombre"
@@ -42,29 +49,14 @@ import "../styles/global.css";
       />
     </div>
 
-    <!-- Campo Asunto -->
-    <div class="mb-4">
-      <label for="asunto" class="block text-sm font-medium text-gray-700 mb-2">
-        Asunto
-      </label>
-      <input
-        type="text"
-        id="asunto"
-        name="asunto"
-        required
-        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        placeholder="¿En qué podemos ayudarte?"
-      />
-    </div>
-
     <!-- Campo Mensaje -->
     <div class="mb-6">
-      <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-2">
+      <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
         Mensaje
       </label>
       <textarea
-        id="mensaje"
-        name="mensaje"
+        id="message"
+        name="message"
         rows="4"
         required
         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
@@ -74,9 +66,236 @@ import "../styles/global.css";
     <!-- Botón de enviar -->
     <button
       type="submit"
-      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      id="submitBtn"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hover:cursor-pointer"
     >
       Enviar mensaje
     </button>
   </form>
+
+  <!-- Modal de éxito CORREGIDO -->
+  <div
+    id="successModal"
+    class="fixed inset-0 z-50 hidden"
+  >
+    <!-- Fondo con opacidad separado -->
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <!-- Contenido del modal -->
+    <div class="relative flex items-center justify-center w-full h-full p-4">
+      <div
+        class="bg-white rounded-lg p-8 max-w-sm w-full transform transition-all duration-300 scale-95 opacity-0"
+      >
+        <div class="text-center">
+          <!-- Ícono de éxito -->
+          <div
+            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <Icon name="icon-park-outline:success" size={32} class="text-green-500"/>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-800 mb-2">¡Mensaje Enviado!</h3>
+          <p class="text-gray-600 mb-6">Te contactaremos pronto.</p>
+
+          <button
+            id="closeSuccessModal"
+            class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 hover:cursor-pointer"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de error CORREGIDO -->
+  <div
+    id="errorModal"
+    class="fixed inset-0 z-50 hidden"
+  >
+    <!-- Fondo con opacidad separado -->
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <!-- Contenido del modal -->
+    <div class="relative flex items-center justify-center w-full h-full p-4">
+      <div
+        class="bg-white rounded-lg p-8 max-w-sm w-full transform transition-all duration-300 scale-95 opacity-0"
+      >
+        <div class="text-center">
+          <!-- Ícono de error -->
+          <div
+            class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <Icon name="icon-park-outline:error" />
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Error</h3>
+          <p id="errorMessage" class="text-gray-600 mb-6">
+            Ha ocurrido un error al enviar el mensaje.
+          </p>
+
+          <button
+            id="closeErrorModal"
+            class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-md transition duration-200"
+          >
+            Intentar de nuevo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading overlay CORREGIDO -->
+  <div
+    id="loadingOverlay"
+    class="fixed inset-0 z-50 hidden"
+  >
+    <!-- Fondo con opacidad separado -->
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <!-- Contenido del loading -->
+    <div class="relative flex items-center justify-center w-full h-full">
+      <div class="bg-white rounded-lg p-6 flex items-center space-x-4">
+        <!-- Spinner -->
+        <div
+          class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"
+        ></div>
+        <p class="text-gray-700 font-medium">Enviando mensaje...</p>
+      </div>
+    </div>
+  </div>
 </Layout>
+
+<script>
+  import emailjs from "@emailjs/browser";
+
+  // Interfaces TypeScript para type safety
+  interface EmailJSError {
+    text?: string;
+    status?: number;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contactForm") as HTMLFormElement;
+    const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
+
+    // Elementos del modal con type assertions
+    const successModal = document.getElementById('successModal') as HTMLDivElement;
+    const errorModal = document.getElementById('errorModal') as HTMLDivElement;
+    const loadingOverlay = document.getElementById('loadingOverlay') as HTMLDivElement;
+    const errorMessage = document.getElementById('errorMessage') as HTMLParagraphElement;
+    
+    // Botones de cerrar
+    const closeSuccessModal = document.getElementById('closeSuccessModal') as HTMLButtonElement;
+    const closeErrorModal = document.getElementById('closeErrorModal') as HTMLButtonElement;
+
+    if (!form) return;
+
+    // Función para mostrar modal de éxito
+    function showSuccessModal(): void {
+      if (!successModal) return;
+      
+      const modalContent = successModal.querySelector('.bg-white') as HTMLDivElement;
+      successModal.classList.remove('hidden');
+      
+      // Animación de entrada
+      setTimeout(() => {
+        if (modalContent) {
+          modalContent.classList.remove('scale-95', 'opacity-0');
+          modalContent.classList.add('scale-100', 'opacity-100');
+        }
+      }, 10);
+    }
+
+    // Función para mostrar modal de error
+    function showErrorModal(message: string): void {
+      if (!errorModal || !errorMessage) return;
+      
+      errorMessage.textContent = message;
+      const modalContent = errorModal.querySelector('.bg-white') as HTMLDivElement;
+      errorModal.classList.remove('hidden');
+      
+      setTimeout(() => {
+        if (modalContent) {
+          modalContent.classList.remove('scale-95', 'opacity-0');
+          modalContent.classList.add('scale-100', 'opacity-100');
+        }
+      }, 10);
+    }
+
+    // Función para ocultar modales
+    function hideModals(): void {
+      const modals = [successModal, errorModal, loadingOverlay];
+      
+      modals.forEach(modal => {
+        if (!modal) return;
+        
+        const content = modal.querySelector('.bg-white') as HTMLDivElement;
+        if (content) {
+          content.classList.remove('scale-100', 'opacity-100');
+          content.classList.add('scale-95', 'opacity-0');
+        }
+        
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 300);
+      });
+    }
+
+    // Event listeners para cerrar modales
+    closeSuccessModal?.addEventListener('click', hideModals);
+    closeErrorModal?.addEventListener('click', hideModals);
+    
+    // Cerrar modal al hacer clic fuera del contenido
+    [successModal, errorModal].forEach(modal => {
+      modal?.addEventListener('click', (e: Event) => {
+        if (e.target === modal) {
+          hideModals();
+        }
+      });
+    });
+
+    // Event listener del formulario
+    form.addEventListener("submit", async function (e: Event) {
+      e.preventDefault();
+
+      // Mostrar loading
+      if (loadingOverlay) {
+        loadingOverlay.classList.remove('hidden');
+      }
+
+      // Deshabilitar botón
+      const originalText = submitBtn.textContent || 'Enviar mensaje';
+      submitBtn.textContent = 'Enviando...';
+      submitBtn.disabled = true;
+
+      try {
+        const publicKey = import.meta.env.PUBLIC_EMAILJS_KEY;
+        const serviceId = import.meta.env.PUBLIC_SERVICE_ID;
+        const templateId = import.meta.env.PUBLIC_TEMPLATE_ID;
+
+        if (!publicKey || !serviceId || !templateId) {
+          throw new Error("Faltan configurar las credenciales de EmailJS");
+        }
+
+        const result = await emailjs.sendForm(serviceId, templateId, form, {
+          publicKey: publicKey,
+        });
+
+        // Ocultar loading y mostrar éxito
+        loadingOverlay?.classList.add('hidden');
+        showSuccessModal();
+        form.reset();
+
+      } catch (error) {
+        // Ocultar loading y mostrar error
+        loadingOverlay?.classList.add('hidden');
+        const emailError = error as EmailJSError;
+        const errorText = emailError?.text || 'Ha ocurrido un error al enviar el mensaje. Por favor, intenta de nuevo.';
+        showErrorModal(errorText);
+        
+      } finally {
+        // Restaurar botón
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  });
+</script>
