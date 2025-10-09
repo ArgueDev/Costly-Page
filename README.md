@@ -1,46 +1,51 @@
-# Astro Starter Kit: Basics
+<h1 align="center">📱 Costly - Controla tus gastos de viaje</h1>
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+<p align="center">
+  <img src="src/assets/logo.png" alt="Costly Demo" width="400"/>
+</p>
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+<p align="center">
+  <b>Costly</b> es una aplicación móvil simple y práctica para llevar el control de los gastos en tus viajes.  
+  La landing page está pensada para presentar la app de manera clara y profesional.
+</p>
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## ✨ Características principales
+- Registro y visualización de gastos de viaje.
+- Organización sencilla y accesible desde cualquier dispositivo.
+- Interfaz limpia y fácil de usar.
+- Compatible con Android (Pronto en IOS 🚀).
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+---
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🌐 Landing Page
+👉 Puedes visitar la página aquí: **[Costly Landing Page](https://miportafolio.com/costly)**  
 
-## 🧞 Commands
+La landing está construida con:
+- ⚡ **Astro** como framework.
+- 🎨 **TailwindCSS** para estilos responsivos y modernos.
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## 📸 Capturas de la app
+| Dashboard | Lista de gastos | Crear gasto |
+|-------|----------------|-------------|
+| ![](src/assets/dashboard.png) | ![](src/assets/lista-gastos.png) | ![](src/assets/formulario.png) |
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🛠️ Tecnologías usadas en la app
+- Flutter
+- Dart
+- SQLite / Local Database
+- Provider (State Management)
+
+---
+
+## 📬 Contacto
+Si quieres saber más de mis proyectos:
+- LinkedIn: [Christian Arguello](https://www.linkedin.com/in/christianargue/)  
+- Email: **christianarguelloo97@gmail.com**
+
+---
