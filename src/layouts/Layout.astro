@@ -1,20 +1,66 @@
 ---
-import Analytics  from '@vercel/analytics/astro';
+import Analytics from '@vercel/analytics/astro';
 
 const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/logo.png" />
-		<title>{title}</title>
-		<Analytics />
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <!-- ⚙️ Configuración básica -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- 🏷️ Título y descripción -->
+    <title>{title}</title>
+    <meta
+      name="description"
+      content="Costly es una app de control de gastos para tus viajes. Define tu presupuesto, registra tus gastos y mantén el control de tu dinero fácilmente desde tu celular."
+    />
+
+    <!-- 🔑 Palabras clave y autor -->
+    <meta
+      name="keywords"
+      content="Costly, app de gastos, control de presupuesto, viajes, finanzas personales, app Flutter, control de dinero"
+    />
+    <meta name="author" content="Christian Arguello" />
+    <meta name="theme-color" content="#1E88E5" />
+
+    <!-- 🧭 SEO -->
+    <link rel="canonical" href="https://costly-page.vercel.app/" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- 🖼️ Open Graph (Facebook, WhatsApp, LinkedIn, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://costly-page.vercel.app/" />
+    <meta property="og:title" content="Costly - Controla tus gastos de viaje fácilmente" />
+    <meta
+      property="og:description"
+      content="Lleva el control de tus gastos durante tus viajes. Costly te ayuda a definir tu presupuesto, registrar tus compras y ver cuánto te queda disponible."
+    />
+    <meta property="og:image" content="https://costly-page.vercel.app/banner.png" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Costly" />
+
+    <!-- 🐦 Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://costly-page.vercel.app/" />
+    <meta name="twitter:title" content="Costly - Controla tus gastos de viaje fácilmente" />
+    <meta
+      name="twitter:description"
+      content="Costly te ayuda a administrar tu dinero durante tus viajes. Define tu presupuesto, registra gastos y visualiza tus finanzas fácilmente."
+    />
+    <meta name="twitter:image" content="https://costly-page.vercel.app/banner.png" />
+
+    <!-- 🧩 Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <!-- 📈 Analytics -->
+    <Analytics />
+  </head>
+
+  <body>
+    <slot />
+  </body>
 </html>
